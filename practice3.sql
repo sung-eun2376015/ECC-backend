@@ -217,3 +217,129 @@ mysql> select * from sample551 where no in (select no2 from sample552);
 |    5 | 없음 |
 +------+------+
 2 rows in set (0.065 sec)
+
+mysql> use sample
+Database changed
+mysql> create table sample62( no integer not null, a varchar(30), b date);
+Query OK, 0 rows affected (14.299 sec)
+
+mysql> desc sample62;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int         | NO   |     | NULL    |       |
+| a     | varchar(30) | YES  |     | NULL    |       |
+| b     | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.411 sec)
+
+mysql> alter table sample62 add newcol integer;
+Query OK, 0 rows affected (1.686 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc sample62;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| no     | int         | NO   |     | NULL    |       |
+| a      | varchar(30) | YES  |     | NULL    |       |
+| b      | date        | YES  |     | NULL    |       |
+| newcol | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.026 sec)
+
+mysql> alter table sample62 modify newcol varchar(20);
+Query OK, 0 rows affected (1.794 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc sample62;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| no     | int         | NO   |     | NULL    |       |
+| a      | varchar(30) | YES  |     | NULL    |       |
+| b      | date        | YES  |     | NULL    |       |
+| newcol | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.030 sec)
+
+mysql> alter table sample62 change newcol c varchar(20);
+Query OK, 0 rows affected (0.279 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc sample62;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int         | NO   |     | NULL    |       |
+| a     | varchar(30) | YES  |     | NULL    |       |
+| b     | date        | YES  |     | NULL    |       |
+| c     | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.032 sec)
+
+mysql> alter table sample62 drop c;
+Query OK, 0 rows affected (1.270 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc sample62;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int         | NO   |     | NULL    |       |
+| a     | varchar(30) | YES  |     | NULL    |       |
+| b     | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.027 sec)
+
+mysql> create table sample631(a integer not null,b integer not null unique,c varchar(30));
+Query OK, 0 rows affected (0.667 sec)
+
+mysql> desc sample631;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| a     | int         | NO   |     | NULL    |       |
+| b     | int         | NO   | PRI | NULL    |       |
+| c     | varchar(30) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.032 sec)
+
+mysql> create table sample632(no integer not null,sub_no integer not null,name varchar(30),constraint pkey primary key(no,sub_no));
+Query OK, 0 rows affected (0.540 sec)
+
+mysql> desc sample632;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| no     | int         | NO   | PRI | NULL    |       |
+| sub_no | int         | NO   | PRI | NULL    |       |
+| name   | varchar(30) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.039 sec)
+
+mysql> select * from sample62;
+Empty set (0.011 sec)
+
+mysql> create index issample62 on sample62(no);
+Query OK, 0 rows affected (0.324 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create view sv67 as select * from sample54;
+Query OK, 0 rows affected (0.109 sec)
+
+mysql> select * from sv67;
++------+------+
+| no   | a    |
++------+------+
+|    1 |  100 |
+|    2 |  900 |
+|    3 |   20 |
+|    4 |   80 |
++------+------+
+4 rows in set (0.048 sec)
+
+mysql> drop view sv67;
+Query OK, 0 rows affected (0.090 sec)
+
+mysql>
