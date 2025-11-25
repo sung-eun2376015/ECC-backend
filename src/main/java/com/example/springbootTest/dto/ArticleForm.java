@@ -4,11 +4,15 @@ import com.example.springbootTest.entity.Article;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Getter @Setter
 public class ArticleForm {
+    private Long id;
     private String title;
     private String content;
 
@@ -27,6 +31,6 @@ public class ArticleForm {
 
     public Article toEntity(){
 
-        return new Article(null,title,content);
+        return new Article(id,title,content);
     }
 }
