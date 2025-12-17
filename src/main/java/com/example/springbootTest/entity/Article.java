@@ -1,9 +1,6 @@
 package com.example.springbootTest.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import	jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -13,7 +10,7 @@ import lombok.*;
 @Getter @Setter
 public class Article {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -21,6 +18,15 @@ public class Article {
 
     @Column
     private String content;
+
+    public void patch(Article article) {
+        if(article.title!=null){
+            this.title=article.title;
+        }
+        if(article.content!=null){
+            this.content=article.content;
+        }
+    }
 
 //    public Article(Long id,	String title,String content) {
 //        this.id=id;
