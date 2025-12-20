@@ -33,7 +33,7 @@ public class CommentApiController {
     }
 
     //3.댓글 수정
-    @PostMapping("/api/comments/{id}")
+    @PatchMapping("/api/comments/{id}")
     public ResponseEntity<CommentDto> update(@PathVariable("id") Long id,@RequestBody CommentDto dto){
         //서비스에 시키기
         CommentDto updatedDto=commentService.update(id,dto);
