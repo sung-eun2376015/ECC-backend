@@ -1,8 +1,10 @@
 package com.example.springbootTest.controller;
 
 import com.example.springbootTest.dto.ArticleForm;
+import com.example.springbootTest.dto.CommentDto;
 import com.example.springbootTest.entity.Article;
 import com.example.springbootTest.repository.ArticleRepository;
+import com.example.springbootTest.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class ArticleController {
 
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/articles/new")
     public String newArticleForm(){
@@ -49,8 +53,11 @@ public class ArticleController {
     public String show(@PathVariable("id") Long id, Model model){
         //id를 조회해 데이터 가져오기
         Article articleEntity=articleRepository.findById(id).orElse(null);
+        //댓글 목록 가져오기
+        List<CommentDto> commentsDtos=commentService.comments(id);
 
         model.addAttribute("article",articleEntity);
+        model.addAttribute("commentDtos",commentsDtos);
 
         return "articles/show";
     }
